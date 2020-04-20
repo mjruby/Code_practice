@@ -13,7 +13,7 @@ package leetcode;
 
 public class 最长回文子串 {
     public static void main(String[] args) {
-        String str = null;
+        String str = "bcdab";
         System.out.println(longestPalindrome(str));
     }
 
