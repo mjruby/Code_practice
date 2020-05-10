@@ -13,10 +13,13 @@ package leetcode;
 
 public class 最长回文子串 {
     public static void main(String[] args) {
-        String str = "bcdab";
+        String str = "babad";
         System.out.println(longestPalindrome(str));
+        System.out.println(longestPalindrome1(str));
+//        System.out.println(isPalindrome("cabad",2,2));
     }
 
+    // 动态规划  不是最优
     public static String longestPalindrome(String s) {
         if(s == null || s.length() == 0) return s;
         int len = s.length();
@@ -43,5 +46,27 @@ public class 最长回文子串 {
             }
         }
         return s.substring(start,end+1);
+    }
+
+
+    // 解法二
+    public static String longestPalindrome1(String s) {
+        if(s.length() == 0) return "";
+        String res = "";
+        for (int i = 0; i < s.length(); i++) {
+            String s1 = isPalindrome(s, i, i);
+            String s2 = isPalindrome(s, i, i+1);
+            res = res.length() > s1.length() ? res : s1;
+            res = res.length() > s2.length() ? res : s2;
+        }
+        return res;
+    }
+
+    // 返回以mid为中点的回文串
+    public static String isPalindrome(String s,int mid_l,int mid_r){
+        while (mid_l >= 0 && mid_r <= s.length()-1 && s.charAt(mid_l) == s.charAt(mid_r)){
+            mid_l--; mid_r++;
+        }
+        return s.substring(mid_l+1,mid_r);
     }
 }
